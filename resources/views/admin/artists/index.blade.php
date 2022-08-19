@@ -1,7 +1,7 @@
 @extends('layouts.admin ')
 @section('content')
     <div class="container">
-        <table class="table">
+        <table class="table table-dark table-striped">
             <caption>List of artists</caption>
             <thead>
             <tr>
@@ -25,8 +25,8 @@
                 <tr>
                     <th scope="row">{{($artists->currentpage()-1)*$artists->perpage()+$loop->index+1}}</th>
                     <td>{{$artist->first_name_uz}}</td>
-                    <td style="width: 100px; height: 100px;"><img style="width: 100%; height: 100%;"  src="./images/notebook/mbp-silver-select-202011_result-500x500.jpeg"></td>
                     <td>{{$artist->last_name_uz}}</td>
+                    <td>{{$artist->speciality}}</td>
                     <td>{{$artist->rate}}</td>
                     <td>{{$artist->category_id}}</td>
                     <td>{{$artist->description_uz}}</td>
@@ -44,7 +44,7 @@
                         </a>
                     </td>
                     <td>
-                        <form method="post" action="{{route('admin.artists.destroy',['artist'=>$artists->id])}}">
+                        <form method="post" action="{{route('admin.artists.destroy',['artist'=>$artist->id])}}">
                             @method('DELETE')
                             @csrf
                             <button type="submit" class="btn btn-danger">

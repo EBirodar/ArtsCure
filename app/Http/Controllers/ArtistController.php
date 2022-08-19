@@ -37,7 +37,9 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        Artist::create($this->validateData());
+        $this->validateData($request);
+
+        Artist::create($request->all());
         return redirect()->route('admin.artists.index');
     }
 
@@ -62,7 +64,7 @@ class ArtistController extends Controller
     public function edit(Artist $artist)
     {
         return view('admin.artists.edit',[
-            'product'=>$artist
+            'artist'=>$artist
         ]);
     }
 
@@ -75,7 +77,8 @@ class ArtistController extends Controller
      */
     public function update(Request $request,Artist $artist)
     {
-        $artist->update($this->validateData());
+        $this->validateData($request);
+        $artist->update($request->all());
         return redirect()->route('admin.artists.index');
     }
 
@@ -92,17 +95,16 @@ class ArtistController extends Controller
         return redirect()->route('admin.artists.index');
     }
 
-    public function validateData()
+    public function validateData($request)
     {
-        return request()->validate([
+        return $request->validate([
             'first_name_uz'=>'required',
             'last_name_uz'=>'required',
             'speciality'=>'required',
             'rate'=>'required',
             'category_id'=>'required',
-//            'muzey_uz'=>'required',
-//            'medal_uz'=>'required',
-//            'views'=>'required'
+            'muzey_uz'=>'string',
+            'views'=>'string'
         ]);
 
     }

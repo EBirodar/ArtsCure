@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('speciality');
             $table->float('rate');
             $table->unsignedInteger('category_id');
-            $table->string('description_uz');
-            $table->string('muzey_uz');
-            $table->string('medal_uz');
-            $table->string('views');
+            $table->string('description_uz')->nullable();
+            $table->string('muzey_uz')->nullable();
+            $table->string('medal_uz')->nullable();
+            $table->string('views')->nullable();
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');

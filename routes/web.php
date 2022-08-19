@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\ToolController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\DashboardController;
@@ -37,6 +38,7 @@ Route::middleware([
                 Route::get('/dashboard', Dashboard::class)->name('dashboard');
                 Route::resource('users', UserController::class);
                 Route::resource('artists', ArtistController::class);
+                Route::resource('tools', ToolController::class);
                 Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
                 Route::controller(MessageController::class)->group(function () {
                     Route::get('/notifications', 'notifications')->name('notifications');

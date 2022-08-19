@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 @section('content')
     <h1 class="text-center p-3">Information about computer</h1>
     <div class="container border row d-flex align-items-center " style="height: 60vh">

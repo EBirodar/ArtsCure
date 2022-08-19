@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index(){
-        $users = User::where('type', 'user')->paginate(10);
+        $users = User::where('role', '1')->paginate(10);
         $num = 0;
         return view("admin.users.index", ['users' => $users, 'num' => $num]);
     }

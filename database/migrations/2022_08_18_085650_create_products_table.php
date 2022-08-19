@@ -16,17 +16,17 @@ return new class extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name_uz');
-            $table->string('certificate');
+            $table->string('certificate')->nullable();
             $table->string('frame');
-            $table->float('size');
-            $table->string('description_uz');
-            $table->string('year');
-            $table->string('city');
-            $table->string('unique');
-            $table->string('signature');
-            $table->string('price');
-            $table->string('status');
-            $table->string('views');
+            $table->float('size')->nullable();
+            $table->string('description_uz')->nullable();
+            $table->string('year')->nullable();
+            $table->string('city')->nullable();
+            $table->string('unique')->nullable();
+            $table->string('signature')->nullable();
+            $table->string('price')->nullable();
+            $table->tinyInteger('status')->default(1);
+            $table->string('views')->nullable();
             $table->timestamps();
         });
     }

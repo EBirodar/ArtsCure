@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name_uz');
             $table->unsignedInteger('category_id');
-            $table->string('views');
+            $table->string('views')->nullable();
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories');

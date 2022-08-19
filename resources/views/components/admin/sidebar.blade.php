@@ -53,6 +53,24 @@
             <li><a href="ecommerce-orders.html">Orders</a></li>
           </ul>
         </li>
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="uil-users-alt"></i>
+            <span>Artists</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="{{ Route('admin.artists.index') }}">List</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="javascript: void(0);" class="has-arrow waves-effect">
+            <i class="uil-users-alt"></i>
+            <span>Tools</span>
+          </a>
+          <ul class="sub-menu" aria-expanded="false">
+            <li><a href="{{ Route('admin.tools.index') }}">List</a></li>
+          </ul>
+        </li>
 
         <li>
           <a href="javascript: void(0);" class="has-arrow waves-effect">
