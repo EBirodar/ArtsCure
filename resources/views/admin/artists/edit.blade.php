@@ -35,6 +35,10 @@
                     <input type="text" class="form-control" id="category_id" name="category_id" value="{{$artist->category_id}}">
                 </div>
                 <div class="mb-3">
+                    <label for="tool_name_uz" class="form-label">{{__('Tool name uz')}}</label>
+                    <input type="text" class="" id="tool_name_uz" name="tool_name_uz" value="{{$artist->category_id}}">
+                </div>
+                <div class="mb-3">
                     <label for="description_uz" class="form-label">{{__('description_uz')}}</label>
                     <input type="text" class="form-control" id="description_uz" name="description_uz" value="{{$artist->description_uz}}">
                 </div>

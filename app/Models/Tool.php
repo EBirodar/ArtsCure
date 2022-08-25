@@ -12,8 +12,13 @@ class Tool extends Model
         'name_uz'
     ];
 
-    public function toolable()
+    public function artists()
     {
-        return $this->morphMany(Toolable::class, 'transferable');
+        return $this->morphedByMany(Artist::class, 'toolable');
+    }
+
+    public function products()
+    {
+        return $this->morphedByMany(Product::class, 'toolable');
     }
 }

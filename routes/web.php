@@ -23,6 +23,7 @@ use App\Http\Livewire\Admin\Dashboard;
 
 // Front Routes
 Route::get('/', function(){
+
     return view('front.welcome');
 })->name('home');
 

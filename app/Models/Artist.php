@@ -30,12 +30,12 @@ class Artist extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function toolable()
+    public function tools()
     {
-        return $this->morphMany(Toolable::class, 'transferable');
+        return $this->morphToMany(Tool::class, 'toolable');
     }
-    public function imageable()
+    public function images()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphToMany(Image::class, 'imageable');
     }
 }

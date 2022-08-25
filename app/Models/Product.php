@@ -8,6 +8,20 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
+    protected $fillable=[
+        'name_uz',
+        'certificate',
+        'frame',
+        'size',
+        'description_uz',
+        'year',
+        'city',
+        'unique',
+        'signature',
+        'price',
+        'status',
+        'views'
+    ];
 
 
     public function types()
@@ -20,12 +34,12 @@ class Product extends Model
         return $this->belongsTo(Artist::class);
     }
 
-    public function toolable()
+    public function tools()
     {
-        return $this->morphMany(Toolable::class, 'toolable');
+        return $this->morphToMany(Tool::class, 'toolable');
     }
     public function imageable()
     {
-        return $this->morphMany(Image::class, 'imageable');
+        return $this->morphToMany(Image::class, 'imageable');
     }
 }

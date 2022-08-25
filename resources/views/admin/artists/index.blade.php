@@ -11,6 +11,7 @@
                 <th scope="col">{{__('speciality')}}</th>
                 <th scope="col">{{__('rate')}}</th>
                 <th scope="col">{{__('category_id')}}</th>
+                <th scope="col">{{__('tools')}}</th>
                 <th scope="col">{{__('description_uz')}}</th>
                 <th scope="col">{{__('muzey_uz')}}</th>
                 <th scope="col">{{__('medal_uz')}}</th>
@@ -29,6 +30,11 @@
                     <td>{{$artist->speciality}}</td>
                     <td>{{$artist->rate}}</td>
                     <td>{{$artist->category_id}}</td>
+                    <td>
+                    @foreach($artist->tools as $tool)
+                    {{$tool->name_uz}}<br>
+                    @endforeach
+                    </td>
                     <td>{{$artist->description_uz}}</td>
                     <td>{{$artist->muzey_uz}}</td>
                     <td>{{$artist->medal_uz}}</td>
