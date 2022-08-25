@@ -34,9 +34,16 @@
                     <label for="category_id" class="form-label">{{__('category_id')}}</label>
                     <input type="text" class="form-control" id="category_id" name="category_id" value="{{$artist->category_id}}">
                 </div>
-                <div class="mb-3">
-                    <label for="tool_name_uz" class="form-label">{{__('Tool name uz')}}</label>
-                    <input type="text" class="" id="tool_name_uz" name="tool_name_uz" value="{{$artist->category_id}}">
+                <div class=" row justify-content-center">
+                    <strong>Tool List</strong>
+                    <select id='myselect' multiple name="tools[]">
+                        @foreach($toolList as $tool)
+                            <option value="{{$tool->id}}">{{$tool->name_uz}}</option>
+                        @endforeach
+                        @foreach($artist->tools() as $tool)
+                            <option selected value="{{$tool->id}}">{{$tool->name_uz}}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="description_uz" class="form-label">{{__('description_uz')}}</label>

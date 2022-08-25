@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('content')
+
     <h1 class="text-center p-3">{{__('Create Item')}}</h1>
     <div class="row d-flex justify-content-center">
         <div class="col-md-4">
@@ -34,6 +35,14 @@
                     <label for="category_id" class="form-label">{{__('category_id')}}</label>
                     <input type="text" class="form-control" id="category_id" name="category_id" value="{{old('category_id')}}">
                 </div>
+                    <div class=" row justify-content-center">
+                            <strong>Tool List</strong>
+                            <select id='myselect' multiple name="tools[]">
+                                @foreach($toolList as $tool)
+                                <option  value="{{$tool->id}}">{{$tool->name_uz}}</option>
+                                @endforeach
+                            </select>
+                    </div>
                 <div class="mb-3">
                     <label for="description_uz" class="form-label">{{__('description_uz')}}</label>
                     <input type="text" class="form-control" id="description_uz" name="description_uz" value="{{old('description_uz')}}">
@@ -56,5 +65,7 @@
         </div>
     </div>
 @endsection
+
+
 
 

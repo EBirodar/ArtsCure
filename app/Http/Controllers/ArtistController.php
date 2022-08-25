@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artist;
+use App\Models\Tool;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -26,7 +27,11 @@ class ArtistController extends Controller
      */
     public function create()
     {
-        return view('admin.artists.create');
+        $toolList=Tool::all();
+        return view('admin.artists.create',[
+            'toolList'=>$toolList,
+            ''
+        ]);
     }
 
     /**
@@ -37,9 +42,25 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateData($request);
 
-        Artist::create($request->all());
+//        $this->validateData($request);
+        $artist= new Artist();
+        $artist->first_name_uz=$request->first_name_uz;
+        $artist->last_name_uz=$request->last_name_uz;
+        $artist->speciality=$request->speciality;
+        $artist->rate=$request->rate;
+        $artist->category_id=$request->category_id;
+        $artist->description_uz=$request->description_uz;
+        $artist->muzey_uz=$request->muzey_uz;
+        $artist->medal_uz=$request->medal_uz;
+        $artist->views=$request->views;
+        $artist->save();
+        foreach ($request->tools as $id)
+        {
+            $tool=Tool::find($id);
+            $artist->tools()->attach($tool);
+        }
+
         return redirect()->route('admin.artists.index');
     }
 
@@ -63,8 +84,12 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
+        dd($artist->tools());
+
+        $toolList=Tool::all();
         return view('admin.artists.edit',[
-            'artist'=>$artist
+            'artist'=>$artist,
+            'toolList'=>$toolList
         ]);
     }
 
@@ -108,4 +133,7 @@ class ArtistController extends Controller
         ]);
 
     }
+
+
+
 }

@@ -17,7 +17,7 @@
         {{ isset($slot) ? $slot : ''}}
         @yield('content')
         {{-- Main Content End --}}
-        
+
       </div>
       @include('components.admin.footer')
     </div>
@@ -25,5 +25,12 @@
   </div>
   @include('components.admin.scripts')
   @stack('scripts')
+  <script>
+      $('#myselect').select2({
+          width: '100%',
+          placeholder: "Select an Option",
+          allowClear: true
+      });
+  </script>
 </body>
 </html>
