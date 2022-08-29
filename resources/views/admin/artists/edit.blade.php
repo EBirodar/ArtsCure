@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
-    <h1 class="text-center p-3">{{__('Update Item')}}</h1>
+{{--    <h1 class="text-center p-3">{{__('Update Item')}}</h1>--}}
     <div class="row">
         <div class="col-md-6">
-            @if ($errors->any())
+{{--            @if ($errors->any())--}}
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -11,7 +11,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+{{--            @endif--}}
             <form method="post" action="{{route('admin.artists.update',$artist->id)}}">
                 @method('PUT')
                 @csrf                <div class="mb-3">
@@ -36,13 +36,14 @@
                 </div>
                 <div class=" row justify-content-center">
                     <strong>Tool List</strong>
-                    <select id='myselect' multiple name="tools[]">
+                    <select id='myselect'
+                            multiple name="tools[]">
                         @foreach($toolList as $tool)
-                            <option value="{{$tool->id}}">{{$tool->name_uz}}</option>
+                            <option @if(in_array($tool->id, $tool_ids)) selected @endif value="{{$tool->id}}">{{$tool->name_uz}}</option>
                         @endforeach
-                        @foreach($artist->tools() as $tool)
-                            <option selected value="{{$tool->id}}">{{$tool->name_uz}}</option>
-                        @endforeach
+{{--                        @foreach($artist->tools() as $tool)--}}
+{{--                            <option value="{{$tool->id}}">{{$tool->name_uz}}</option>--}}
+{{--                        @endforeach--}}
                     </select>
                 </div>
                 <div class="mb-3">
@@ -66,6 +67,14 @@
             </form>
         </div>
     </div>
+    <script>
+        @php
+        @endphp
+        $('#myselect').select2({
+            placeholder: "Select a pill",
+            data: function() { return {results: "{{$toolList}}"}; }
+        });
+    </script>
 @endsection
 
 

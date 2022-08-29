@@ -84,12 +84,17 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-        dd($artist->tools());
+//        dd($artist->tools());
 
         $toolList=Tool::all();
+        $tool_ids = [];
+        foreach($artist->tools as $tool){
+            array_push($tool_ids,$tool->id);
+        }
         return view('admin.artists.edit',[
             'artist'=>$artist,
-            'toolList'=>$toolList
+            'toolList'=>$toolList,
+            'tool_ids'=>$tool_ids
         ]);
     }
 

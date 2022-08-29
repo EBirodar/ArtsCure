@@ -37,7 +37,8 @@
                 </div>
                     <div class=" row justify-content-center">
                             <strong>Tool List</strong>
-                            <select id='myselect' multiple name="tools[]">
+                            <select id='myselect'
+                                    multiple name="tools[]">
                                 @foreach($toolList as $tool)
                                 <option  value="{{$tool->id}}">{{$tool->name_uz}}</option>
                                 @endforeach
