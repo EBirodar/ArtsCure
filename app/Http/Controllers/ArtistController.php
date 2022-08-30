@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Services\ArtistService;
 use App\Models\Artist;
 use App\Models\Tool;
+use App\Models\Toolable;
 use Illuminate\Http\Request;
 
 class ArtistController extends Controller
@@ -13,6 +15,11 @@ class ArtistController extends Controller
      *
 //     * @return \Illuminate\Http\Response
      */
+    public $service;
+    public function __construct()
+    {
+        $this->service=new ArtistService();
+    }
     public function index()
     {
         $artists=Artist::with('tools')->orderByDesc('created_at')->paginate(5);
@@ -29,8 +36,7 @@ class ArtistController extends Controller
     {
         $toolList=Tool::all();
         return view('admin.artists.create',[
-            'toolList'=>$toolList,
-            ''
+            'toolList'=>$toolList
         ]);
     }
 
@@ -42,25 +48,7 @@ class ArtistController extends Controller
      */
     public function store(Request $request)
     {
-
-//        $this->validateData($request);
-        $artist= new Artist();
-        $artist->first_name_uz=$request->first_name_uz;
-        $artist->last_name_uz=$request->last_name_uz;
-        $artist->speciality=$request->speciality;
-        $artist->rate=$request->rate;
-        $artist->category_id=$request->category_id;
-        $artist->description_uz=$request->description_uz;
-        $artist->muzey_uz=$request->muzey_uz;
-        $artist->medal_uz=$request->medal_uz;
-        $artist->views=$request->views;
-        $artist->save();
-        foreach ($request->tools as $id)
-        {
-            $tool=Tool::find($id);
-            $artist->tools()->attach($tool);
-        }
-
+        $this->service->store($request);
         return redirect()->route('admin.artists.index');
     }
 
@@ -84,17 +72,11 @@ class ArtistController extends Controller
      */
     public function edit(Artist $artist)
     {
-//        dd($artist->tools());
-
-        $toolList=Tool::all();
-        $tool_ids = [];
-        foreach($artist->tools as $tool){
-            array_push($tool_ids,$tool->id);
-        }
+        $item=$this->service->edit($artist);
         return view('admin.artists.edit',[
             'artist'=>$artist,
-            'toolList'=>$toolList,
-            'tool_ids'=>$tool_ids
+            'toolList'=>$item->toolList,
+            'tool_ids'=>$item->tool_ids
         ]);
     }
 
@@ -107,8 +89,7 @@ class ArtistController extends Controller
      */
     public function update(Request $request,Artist $artist)
     {
-        $this->validateData($request);
-        $artist->update($request->all());
+        $this->service->update($request,$artist);
         return redirect()->route('admin.artists.index');
     }
 
@@ -120,24 +101,11 @@ class ArtistController extends Controller
      */
     public function destroy(Artist $artist)
     {
-
-        $artist->delete();
+        $this->service->delete($artist);
         return redirect()->route('admin.artists.index');
     }
 
-    public function validateData($request)
-    {
-        return $request->validate([
-            'first_name_uz'=>'required',
-            'last_name_uz'=>'required',
-            'speciality'=>'required',
-            'rate'=>'required',
-            'category_id'=>'required',
-            'muzey_uz'=>'string',
-            'views'=>'string'
-        ]);
 
-    }
 
 
 

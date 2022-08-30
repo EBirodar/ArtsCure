@@ -3,7 +3,7 @@
 {{--    <h1 class="text-center p-3">{{__('Update Item')}}</h1>--}}
     <div class="row">
         <div class="col-md-6">
-{{--            @if ($errors->any())--}}
+            @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -11,7 +11,7 @@
                         @endforeach
                     </ul>
                 </div>
-{{--            @endif--}}
+            @endif
             <form method="post" action="{{route('admin.artists.update',$artist->id)}}">
                 @method('PUT')
                 @csrf                <div class="mb-3">
